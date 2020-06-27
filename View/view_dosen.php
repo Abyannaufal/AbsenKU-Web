@@ -1,7 +1,15 @@
+<?php
+require_once('koneksi.php');
+$nidn = $_SESSION['nidn'];
+$query = "SELECT * FROM dosen WHERE nidn = '$nidn'";
+$result = mysqli_query($conn1,$query);
+$column = mysqli_fetch_array($result);
+$nama = $column[0];
+?>
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title> Mahasiswa </title>
+    <title> Dosen </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" href="bootstrap-css">
@@ -23,7 +31,10 @@
                 <a class="nav-link js-scroll-trigger" href="#option"><img src="setting.png"/><span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#logout"><img src="logout.png"/><span class="sr-only">(current)</span></a>
+              <form id="LogOut" action = "proses.php" method = "POST">
+                <input type = "hidden" name="logout" value = "LOGOUT">
+                <a class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('LogOut').submit();"><img src="logouts.png"/><span class="sr-only">(current)</span></a>
+              </form>
               </li>
               <!--<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#Jadwal" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,66 +63,10 @@
 
       <!--Table-->
       <br><br><br>
-      <h1> NAMA MAHASISWA </h1>
-      <h2> NIM </h2>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">No.</th>
-            <th scope="col">SKS</th>
-            <th scope="col">Mata Kuliah</th>
-            <th scope="col">Kode Kelas</th>
-            <th scope="col">Ruangan</th>
-            <th scope="col">Jadwal</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <!--Nanti di php, ini di loop buat data output-->
-          <tr>
-            <th scope="row">1</th>
-            <td>$SKS</td>
-            <td>$Matkul</td>
-            <td>$KodeKelas</td>
-            <td>$Ruangan</td>
-            <td>$Jadwal</td>
-          </tr>
-          <!--endloop-->
-
-        </tbody>
-      </table>
-
-      <!--Abaikan ini-->
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2><?php echo $nama?></h2>
+      <h3><?php echo $nidn?></h3>
+      <hr>
+      
     </div>
   </body>
 </html>

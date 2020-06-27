@@ -7,7 +7,7 @@ if ( ! empty( $_POST ) ) {
         $nim = $_POST['nim'];
         $pass = $_POST['mhs_password'];
         $query = "SELECT * FROM mahasiswa WHERE nim_mhs = '$nim'";
-        $result = mysqli_query($conn,$query);
+        $result = mysqli_query($conn1,$query);
         $column = mysqli_fetch_array($result);	
         // Verify user password and set $_SESSION
         if($nim == $column[1] && $pass == $column[2])
@@ -15,7 +15,32 @@ if ( ! empty( $_POST ) ) {
             $_SESSION['nim'] = $nim;
             header("Location:index.php");
         }
+        else{
+            header("Location:login.php?w");
+        }
     	
+    }
+    else if ( isset( $_POST['nidn'] ) && isset( $_POST['dsn_password'] ) ) {
+        $nidn = $_POST['nidn'];
+        $pass = $_POST['dsn_password'];
+        $query = "SELECT * FROM dosen WHERE nidn = '$nidn'";
+        $result = mysqli_query($conn1,$query);
+        $column = mysqli_fetch_array($result);	
+        // Verify user password and set $_SESSION
+        if($nidn == $column[1] && $pass == $column[2])
+        {
+            $_SESSION['nidn'] = $nidn;
+            header("Location:index.php");
+        }
+        else{
+            header("Location:login.php?w");
+        }
+    	
+    }
+    else if(isset($_POST['logout']))
+    {
+        session_destroy();
+        header("Location:login.php");
     }
 }
 ?>

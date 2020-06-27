@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -79,10 +80,9 @@
 
   <title>Absenku LOGIN</title>
 </head>
-<body id="page-top">
-
+<body id="page-top" style="background-color:#0079C6;">
   <!--Carousel-->
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <!--<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -107,7 +107,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+  </div> -->
 
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">

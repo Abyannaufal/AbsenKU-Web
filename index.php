@@ -2,25 +2,14 @@
 session_start();
 
 if (isset( $_SESSION['nim'])) {
-    // Grab user data from the database using the user_id
-    // Let them access the "logged in only" pages
+    include 'view/view_mhs.php';
 }
 else if (isset($_SESSION['nidn']))
 {
-
+    include 'view/view_dosen.php';
 } 
 else {
     // Redirect them to the login page
-    header("Location:login.html");
-}
-
-if(isset($_POST['logout'])){
-    session_destroy();
+    header("Location:login.php");
 }
 ?>
-<html>
-    SELAMAT KAMU BERHASIL LOGIN
-    <form method ="POST" action="">
-        <input type = submit value ="LOGOUT" name = "logout">
-    </form>
-</html>
