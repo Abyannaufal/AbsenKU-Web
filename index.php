@@ -6,8 +6,15 @@ if (isset( $_SESSION['nim'])) {
 }
 else if (isset($_SESSION['nidn']))
 {
-    include 'view/view_dosen.php';
-} 
+    if(isset($_GET['absensi']))
+    {    
+        include 'view/view_dsn_class.php';
+    }
+    else
+    {
+        include 'view/view_dosen.php';
+    }
+}
 else {
     // Redirect them to the login page
     header("Location:login.php");
