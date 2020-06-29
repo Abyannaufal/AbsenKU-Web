@@ -141,7 +141,9 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
               </div>
               <div id="collapse_<?php echo $id?>" class="collapse" data-parent="#accordion_<?php echo $id?>">
                 <div class="card-body">
-                  <table border = "1" width = "100%">
+                  Keterangan:<br>
+                  <img src="ccross.png"/> = Tidak hadir, <img src="ccheck.png"/> = Hadir, <img src="cexclam.png"/> = Ijin/Sakit
+                  <table border = "1" width = "100%" style="margin-top:15px;">
                     <tr align="center">
                     <td colspan = "14">Pertemuan</td>
                     </tr>
@@ -169,10 +171,15 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
                               {
                                 echo '<img src="ccross.png"/>';
                               }
-                              else
+                              else if($absen['pertemuan'.$i]=="Hadir")
                               {
                                 $count = $count + 1;
                                 echo '<img src="ccheck.png"/>';
+                              }
+                              else
+                              {
+                                $count = $count + 1;
+                                echo '<img src="cexclam.png"/>';
                               }
                           ?>
                       </td>
