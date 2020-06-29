@@ -17,53 +17,83 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <STYLE>
-      .sidenav {
-        margin-top:50px;
-        height: 100%; /* Full-height: remove this if you want "auto" height */
-        width: 200px; /* Set the width of the sidebar */
-        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-        z-index: 1; /* Stay on top */
-        top: 0; /* Stay at the top */
-        left: 0;
-        background-color: #111; /* Black */
-        overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 20px;
+       /* The side navigation menu */
+      .sidebar {
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #f1f1f1;
+        position: fixed;
+        height: 100%;
+        overflow: auto;
       }
 
-      /* The navigation menu links */
-      .sidenav a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
+      /* Sidebar links */
+      .sidebar a {
         display: block;
+        color: black;
+        padding: 16px;
+        text-decoration: none;
       }
 
-      /* When you mouse over the navigation links, change their color */
-      .sidenav a:hover {
-        color: #f1f1f1;
+      /* Active/current link */
+      .sidebar a.active {
+        background-color: #2D63A9;
+        color: white;
       }
 
-      /* Style page content */
-      .main {
-        margin-top:10px;
-        margin-left: 130px; /* Same as the width of the sidebar */
-        padding: 0px 10px;
+      /* Links on mouse-over */
+      .sidebar a:hover:not(.active) {
+        background-color: #555;
+        color: white;
       }
 
-      /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-      @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
+      /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+      div.content {
+          margin-left: 220px;
+          padding: 1px 16px;
+          height: 100%;
+        }
+
+      /* On screens that are less than 700px wide, make the sidebar into a topbar */
+      @media screen and (max-width: 700px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+        .sidebar a {float: left;}
+        div.content {margin-left: 0;}
       }
+      .navbar-custom { 
+      background-color: #1B2935; 
+      }
+      .navbar-custom .navbar-brand, 
+      .navbar-custom .navbar-text { 
+              color: #FFFFFF; 
+      }
+      .navbar-custom { 
+      background-color: #1B2935; 
+      }
+      .navbar-custom .navbar-brand, 
+      .navbar-custom .navbar-text { 
+              color: #FFFFFF; 
+      }
+
+      /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+      @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
     </STYLE>
   </head>
   <body>
-    <div class="container">
       <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
+      <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
         <div class="container">
-          <a class="navbar-brand" href="#">ABSENKU</a>
+          <a class="navbar-brand" href="#" style='font-size:25px;font-style:italic;font-family:"Arial Black", Gadget, sans-serif'>ABSENKU</a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -75,7 +105,7 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
               <li class="nav-item">
               <form id="LogOut" action = "proses.php" method = "POST">
                 <input type = "hidden" name="logout" value = "LOGOUT">
-                <a class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('LogOut').submit();"><img src="logouts.png"/><span class="sr-only">(current)</span></a>
+                <a class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('LogOut').submit();"><img src="logouts.png"/> <font size="4">Logout</font><span class="sr-only">(current)</span></a>
               </form>
               </li>
               <!--<li class="nav-item dropdown">
@@ -103,9 +133,8 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
         </div>
       </nav>
       <!-- Side navigation -->
-      <br><br><br>
-      <div class="sidenav">
-        <a href="#" style="color:#f1f1f1;">Home</a>
+      <div class="sidebar">
+        <a href="#" class="active">Home</a>
         <form id="Click" action = "proses.php" method = "POST">
           <input type = "hidden" name="view_absensi">
           <a href="#" onclick="document.getElementById('Click').submit();">Absensi<span class="sr-only">(current)</span></a>
@@ -113,8 +142,9 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
       </div>
 
       <!-- Page content -->
-      <div class="main">
+      <div class="content" style="margin-top:62px;">
        <!--Table-->
+       <br>
         <h2><?php echo $nama?></h2>
         <h3><?php echo $nim?></h3>
         <hr>
@@ -132,7 +162,7 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
         ?>
         <div id="accordion_<?php echo $id?>">
           <div class="card">
-              <div class="card-header" style="background-color:#0079C6;">
+              <div class="card-header" style="background-color:#2D63A9;">
                 <a class="card-link" data-toggle="collapse" href="#collapse_<?php echo $id?>" style="color:#fff;">
                   <?php echo $nama_kelas.' - '.$kode_kelas.' | '.$kelas['hari'].' '.$jam_mulai.' - '.$jam_selesai; ?>
                   <font size = "1">[click to expand]</font>
@@ -155,6 +185,5 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
         }
         ?>
       </div>
-    </div>
   </body>
 </html>

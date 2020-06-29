@@ -14,7 +14,7 @@
 
   <style type="text/css">
     .login-container{
-      margin-top: 5%;
+      margin-top: 7%;
       margin-bottom: 5%;
     }
     .login-logo{
@@ -25,7 +25,7 @@
       position: absolute;
       width: 20%;
       margin-top: 19%;
-      background: #0079C6;
+      background: #626D76;
       border-radius: 4.5rem;
       padding: 5%;
     }
@@ -41,7 +41,7 @@
     }
     .login-form-2{
       padding: 9%;
-      background: #0079C6;
+      background: #353C41;
       box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     }
     .login-form-2 h3{
@@ -76,11 +76,18 @@
       width:100%;
       max-height: 500px !important;
     }
+    .navbar-custom { 
+    background-color: #1B2935; 
+    }
+    .navbar-custom .navbar-brand, 
+    .navbar-custom .navbar-text { 
+            color: #FFFFFF; 
+    }  
   </style>
 
   <title>Absenku LOGIN</title>
 </head>
-<body id="page-top" style="background-color:#0079C6;">
+<body id="page-top" style="background-color:#22313D;">
   <!--Carousel-->
   <!--<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -110,9 +117,9 @@
   </div> -->
 
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="#">ABSENKU</a>
+      <a class="navbar-brand" href="#" style='font-size:25px;font-style:italic;font-family:"Arial Black", Gadget, sans-serif'>ABSENKU</a>
       <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
