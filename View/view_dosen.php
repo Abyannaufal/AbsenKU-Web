@@ -104,7 +104,7 @@ $nama = $column[0];
       <!-- Side navigation -->
       <br><br><br>
       <div class="sidenav">
-        <a href="#" style="color:#f1f1f1;">Beranda</a>
+        <a href="#" style="color:#f1f1f1;">Home</a>
         <form id="Click" action = "proses.php" method = "POST">
           <input type = "hidden" name="view_absensi">
           <a href="#" onclick="document.getElementById('Click').submit();">Absensi<span class="sr-only">(current)</span></a>
