@@ -68,9 +68,9 @@ $nama = $column[0];
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="#option"><img src="setting.png"/><span class="sr-only">(current)</span></a>
-              </li>
+              </li>-->
               <li class="nav-item">
               <form id="LogOut" action = "proses.php" method = "POST">
                 <input type = "hidden" name="logout" value = "LOGOUT">
@@ -105,9 +105,9 @@ $nama = $column[0];
       <br><br><br>
       <div class="sidenav">
         <a href="#" style="color:#f1f1f1;">Home</a>
-        <form id="attendance" action = "proses.php" method = "POST">
+        <form id="Click" action = "proses.php" method = "POST">
           <input type = "hidden" name="view_absensi">
-          <a href="#" onclick="document.getElementById('attendance').submit();">Absensi<span class="sr-only">(current)</span></a>
+          <a href="#" onclick="document.getElementById('Click').submit();">Absensi<span class="sr-only">(current)</span></a>
         </form>
       </div>
 
@@ -134,6 +134,7 @@ $nama = $column[0];
               <div class="card-header" style="background-color:#0079C6;">
                 <a class="card-link" data-toggle="collapse" href="#collapse_<?php echo $id?>" style="color:#fff;">
                   <?php echo $nama_kelas.' - '.$kode_kelas.' | '.$kelas['hari'].' '.$jam_mulai.' - '.$jam_selesai; ?>
+                  <font size = "1">[click to expand]</font>
                 </a>
               </div>
               <div id="collapse_<?php echo $id?>" class="collapse" data-parent="#accordion_<?php echo $id?>">

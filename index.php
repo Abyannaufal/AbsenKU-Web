@@ -2,7 +2,15 @@
 session_start();
 
 if (isset( $_SESSION['nim'])) {
-    include 'view/view_mhs.php';
+    
+    if(isset($_GET['absensi']))
+    {    
+        include 'view/view_mhs_absensi.php';
+    }
+    else
+    {
+        include 'view/view_mhs.php';
+    }
 }
 else if (isset($_SESSION['nidn']))
 {

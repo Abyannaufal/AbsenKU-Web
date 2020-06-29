@@ -1,10 +1,11 @@
 <?php
 require_once('koneksi.php');
-$nidn = $_SESSION['nidn'];
-$query = "SELECT * FROM dosen WHERE nidn = '$nidn'";
+$nim = $_SESSION['nim'];
+$query = "SELECT * FROM mahasiswa WHERE nim_mhs = '$nim'";
 $result = mysqli_query($conn1,$query);
 $column = mysqli_fetch_array($result);
 $nama = $column[0];
+$krs = "krs_".strtolower(str_replace(".", "", $nim));
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -46,7 +47,6 @@ $nama = $column[0];
       /* Style page content */
       .main {
         margin-top:10px;
-        margin-bottom:20px;
         margin-left: 130px; /* Same as the width of the sidebar */
         padding: 0px 10px;
       }
@@ -59,7 +59,7 @@ $nama = $column[0];
     </STYLE>
   </head>
   <body>
-    <div class="container" style="width:1900px;">
+    <div class="container">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
         <div class="container">
@@ -105,32 +105,33 @@ $nama = $column[0];
       <!-- Side navigation -->
       <br><br><br>
       <div class="sidenav">
-        <form id="Click" action = "proses.php" method ="POST">
+        <form id="Click" action = "proses.php" method = "POST">
           <input type = "hidden" name="home">
           <a href="#" onclick="document.getElementById('Click').submit();">Home<span class="sr-only">(current)</span></a>
+          <a href="#" style="color:#f1f1f1;">Absensi</a>
         </form>
-        <a href="#" style="color:#f1f1f1;">Absensi</a>
       </div>
 
       <!-- Page content -->
       <div class="main">
        <!--Table-->
         <h2><?php echo $nama?></h2>
-        <h3><?php echo $nidn?></h3>
+        <h3><?php echo $nim?></h3>
         <hr>
         <?php
-        $query_kelas = "SELECT * FROM kelas WHERE dosen = '$nidn' ORDER BY dow_id ASC, jam_mulai ASC"; //select table in database
+        $query_kelas = "SELECT * FROM $krs ORDER BY dow_id ASC, jam_mulai ASC"; //select table in database
         $result2 = mysqli_query($conn2,$query_kelas);
+        $rows=array();
         while ($kelas=mysqli_fetch_assoc($result2))
         {
           $kode_kelas = $kelas['kode_kelas'];
           $nama_kelas = $kelas['nama_kelas'];
           $id = str_replace(".", "", $kode_kelas);
+          $tabel_absen = "absensi_".strtolower($id);
           $jam_mulai = substr($kelas['jam_mulai'], 0, -3);
           $jam_selesai = substr($kelas['jam_selesai'], 0, -3);
-          $tabel_absensi = "absensi_".strtolower($id);
         ?>
-        <div id="accordion_<?php echo $id?>" style="display: inline-flex; flex-wrap: nowrap;">
+        <div id="accordion_<?php echo $id?>">
           <div class="card">
               <div class="card-header" style="background-color:#0079C6;">
                 <a class="card-link" data-toggle="collapse" href="#collapse_<?php echo $id?>" style="color:#fff;">
@@ -140,71 +141,66 @@ $nama = $column[0];
               </div>
               <div id="collapse_<?php echo $id?>" class="collapse" data-parent="#accordion_<?php echo $id?>">
                 <div class="card-body">
-                 <table border = 1 height="100%" width = "100%">
-                  <tr align = "center">
-                    <td rowspan = 2>NIM</td>
-                    <td colspan = 14>Pertemuan</td>
-                    <td rowspan = 2>Aksi</td>
-                  </tr>
-                  <tr align = "center">
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                  </tr>
-                  <?php
-                    $query_absen = "SELECT * FROM $tabel_absensi ORDER BY nama"; //select table in database
-                    $result_absen = mysqli_query($conn3,$query_absen);
-                    if($result_absen == false)
-                    {
-                      echo "<td colspan='16'>No Student(s) Record</td>";
-                    }
-                    else
-                    {
-                      while ($absen=mysqli_fetch_assoc($result_absen))
+                  <table border = "1" width = "100%">
+                    <tr align="center">
+                    <td colspan = "14">Pertemuan</td>
+                    </tr>
+                    <tr align="center">
+                    <?php
+                      for($i=1;$i<=14;$i++)
                       {
-                  ?>
-                        <tr>
-                        <td><?=$absen['nim'];?></td>
-                        <?php
-                          for($i=1;$i<=14;$i++)
-                          {
-                         ?> 
-                            <form method="POST" action ="proses.php">  
-                            <td>
-                            <select name="attendance<?=$i?>" id="attendance">
-                            <option <?php if($absen['pertemuan'.$i]=="Hadir"){echo "Selected='selected'";}?>>Hadir</option>
-                            <option <?php if($absen['pertemuan'.$i]=="Tidak Hadir"){echo "Selected='selected'";}?>>Tidak Hadir</option>
-                            <option <?php if($absen['pertemuan'.$i]=="Ijin"){echo "Selected='selected'";}?>>Ijin</option>
-                            <option <?php if($absen['pertemuan'.$i]=="Sakit"){echo "Selected='selected'";}?>>Sakit</option>
-                            </select>
-                            </td>
-                        <?php
-                          }
-                        ?>
-                        <td>
-                          <input type="submit" name="update_absen" value="Update">
-                          <input type="hidden" name="nim" value = "<?=$absen['nim']?>"/>
-                          <input type="hidden" name="tabel_absensi" value = "<?=$tabel_absensi?>"/>
-                        </td>
-                        </form>
-                        </tr>
-                  <?php
-                      }
-                    }
                     ?>
-                 </table>
+                      <td><?=$i?></td>
+                    <?php
+                      }
+                    ?>
+                    </tr>
+                    <tr align="center">
+                    <?php
+                      $count = 0;
+                      for($i=1;$i<=14;$i++)
+                      {
+                    ?>
+                      <td><?php
+                              $query_absen = "SELECT * FROM $tabel_absen WHERE nim = '$nim'";
+                              $result_absen = mysqli_query($conn3,$query_absen);
+                              $absen = mysqli_fetch_assoc($result_absen);
+                              if($absen['pertemuan'.$i]=="Tidak Hadir")
+                              {
+                                echo '<img src="ccross.png"/>';
+                              }
+                              else
+                              {
+                                $count = $count + 1;
+                                echo '<img src="ccheck.png"/>';
+                              }
+                          ?>
+                      </td>
+                    <?php
+                      }
+                    ?>
+                    </tr>
+                  </table>
                 </div>
+              </div>
+              <div class="card-footer">
+                Attendance Precentage:<br>
+                <?php
+                  $precentage = ($count/14)*100;
+                  $round_precentage = round($precentage);
+                ?>
+                <div class="progress" style="height:25px;margin-top:15px;">
+                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=$round_precentage?>"
+                  aria-valuemin="0" aria-valuemax="100" style="width:<?=$round_precentage?>%">
+                  <?=$round_precentage?>% attended
+                  </div>
+                </div>
+                <?php
+                    if($precentage == 0)
+                    {
+                        echo '<font color="Red"><b>Not Yet Attended</b></font>';
+                    }
+                ?>
               </div>
             </div>
           </div>
