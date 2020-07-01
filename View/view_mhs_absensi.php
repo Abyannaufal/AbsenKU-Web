@@ -187,7 +187,7 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
                       }
                     ?>
                     </tr>
-                    <tr align="center">
+                    <tr align="center" valign="middle">
                     <?php
                       $count = 0;
                       for($i=1;$i<=14;$i++)
