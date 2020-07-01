@@ -152,7 +152,7 @@ $nama = $column[0];
           $jam_selesai = substr($kelas['jam_selesai'], 0, -3);
           $tabel_absensi = "absensi_".strtolower($id);
         ?>
-        <div id="accordion_<?php echo $id?>" style="display: inline-flex; flex-wrap: nowrap;">
+        <div id="accordion_<?php echo $id?>">
           <div class="card">
               <div class="card-header" style="background-color:#2D63A9;">
                 <a class="card-link" data-toggle="collapse" href="#collapse_<?php echo $id?>" style="color:#fff;">
@@ -162,6 +162,8 @@ $nama = $column[0];
               </div>
               <div id="collapse_<?php echo $id?>" class="collapse" data-parent="#accordion_<?php echo $id?>">
                 <div class="card-body">
+                Keterangan:<br>
+                <B>H</B> = HADIR, <B>T/H</B> = TIDAK HADIR, <B>I</B> = IJIN, <B>S</B> = SAKIT<BR>
                  <table border = 1 height="100%" width = "100%">
                   <tr align = "center">
                     <td rowspan = 2>NIM</td>
@@ -205,10 +207,10 @@ $nama = $column[0];
                             <form method="POST" action ="proses.php">  
                             <td>
                             <select name="attendance<?=$i?>" id="attendance">
-                            <option <?php if($absen['pertemuan'.$i]=="Hadir"){echo "Selected='selected'";}?>>Hadir</option>
-                            <option <?php if($absen['pertemuan'.$i]=="Tidak Hadir"){echo "Selected='selected'";}?>>Tidak Hadir</option>
-                            <option <?php if($absen['pertemuan'.$i]=="Ijin"){echo "Selected='selected'";}?>>Ijin</option>
-                            <option <?php if($absen['pertemuan'.$i]=="Sakit"){echo "Selected='selected'";}?>>Sakit</option>
+                            <option <?php if($absen['pertemuan'.$i]=="Hadir"){echo "Selected='selected'";}?>>H</option>
+                            <option <?php if($absen['pertemuan'.$i]=="Tidak Hadir"){echo "Selected='selected'";}?>>T/H</option>
+                            <option <?php if($absen['pertemuan'.$i]=="Ijin"){echo "Selected='selected'";}?>>I</option>
+                            <option <?php if($absen['pertemuan'.$i]=="Sakit"){echo "Selected='selected'";}?>>S</option>
                             </select>
                             </td>
                         <?php
