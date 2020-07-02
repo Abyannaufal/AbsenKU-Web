@@ -16,82 +16,11 @@ $krs = "krs_".strtolower(str_replace(".", "", $nim));
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <STYLE>
-       /* The side navigation menu */
-      .sidebar {
-        margin: 0;
-        padding: 0;
-        width: 200px;
-        background-color: #f1f1f1;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
-      }
-
-      /* Sidebar links */
-      .sidebar a {
-        display: block;
-        color: black;
-        padding: 16px;
-        text-decoration: none;
-      }
-
-      /* Active/current link */
-      .sidebar a.active {
-        background-color: #2D63A9;
-        color: white;
-      }
-
-      /* Links on mouse-over */
-      .sidebar a:hover:not(.active) {
-        background-color: #555;
-        color: white;
-      }
-
-      /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-      div.content {
-          margin-left: 220px;
-          padding: 1px 16px;
-          height: 100%;
-        }
-
-      /* On screens that are less than 700px wide, make the sidebar into a topbar */
-      @media screen and (max-width: 700px) {
-        .sidebar {
-          width: 100%;
-          height: auto;
-          position: relative;
-        }
-        .sidebar a {float: left;}
-        div.content {margin-left: 0;}
-      }
-      .navbar-custom { 
-      background-color: #1B2935; 
-      }
-      .navbar-custom .navbar-brand, 
-      .navbar-custom .navbar-text { 
-              color: #FFFFFF; 
-      }
-      .navbar-custom { 
-      background-color: #1B2935; 
-      }
-      .navbar-custom .navbar-brand, 
-      .navbar-custom .navbar-text { 
-              color: #FFFFFF; 
-      }
-
-      /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-      @media screen and (max-width: 400px) {
-      .sidebar a {
-        text-align: center;
-        float: none;
-      }
-    }
-    </STYLE>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
       <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+      <nav class="navbar navbar-dark navbar-custom navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
           <a class="navbar-brand" href="#" style='font-size:25px;font-style:italic;font-family:"Arial Black", Gadget, sans-serif'>ABSENKU</a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
